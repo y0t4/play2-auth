@@ -40,6 +40,8 @@ trait AuthConfigImpl extends AuthConfig {
   val idTag: ClassTag[Id] = classTag[Id]
   val sessionTimeoutInSeconds: Int = 3600
 
+  override val idContainer: AsyncIdContainer[Id] = ???
+
   def resolveUser(id: Id)(implicit ctx: ExecutionContext): Future[Option[User]] =
     Future.successful(DB.readOnly { implicit session =>
       User.find(id)
